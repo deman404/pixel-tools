@@ -33,12 +33,12 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #646cff;
+  background-color: #0081fb;
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: #0081fb;
 }
 button:focus,
 button:focus-visible {
@@ -62,7 +62,7 @@ button:focus-visible {
   padding: 10px 5px;
   border-radius: 5px;
   transition: 0.3s ease-in-out;
-  color: #4147c2;
+  color: #0081fb;
   
 
 }

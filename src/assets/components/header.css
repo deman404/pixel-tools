@@ -31,12 +31,12 @@
   color: aliceblue;
 }
 .listNav a:hover {
-  color: #0054FF;
+  color: #0084ff;
   transition: all ease-in 0.3s;
 }
 
 .btn {
-  background-color: #0054FF;
+  background-color: #0081fb;
   width: 80px;
   height: 30px;
   border-radius: 5px;

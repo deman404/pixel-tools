@@ -4,14 +4,20 @@ import logo from "../images/logo.png";
 import { IoBagHandle } from "react-icons/io5";
 import useWindowSize from "../Hooks/useWindowSize";
 import Login from "./Login"; // Assuming the Login component is in the parent folder
+import { TbLayoutListFilled } from "react-icons/tb";
+import DropDown from "./DropDown";
 
 function Header() {
   const size = useWindowSize();
   const [isLoginVisible, setLoginVisible] = useState(false);
+  const isPhone = size.width > 800;
+  const [isVisible, setVisible] = useState(false);
 
-  // Function to toggle the visibility of the Login component
   const toggleLogin = () => {
     setLoginVisible((prev) => !prev);
+  };
+  const toggleDropdown = () => {
+    setVisible(!isVisible);
   };
 
   return (
@@ -20,7 +26,7 @@ function Header() {
         className="header blur fadeDownAnimation"
         style={{
           width: size.width > 800 ? "100%" : "100%",
-          justifyContent: size.width > 800 ? "space-around" : "space-between",
+          justifyContent: "space-around",
           alignItems: "center",
         }}
       >
@@ -38,7 +44,10 @@ function Header() {
                 SupraTools
               </a>
             </p>
-            <div className="listNav">
+            <div
+              className="listNav"
+              style={{ display: isPhone ? "flex" : "none" }}
+            >
               <ul>
                 <li>
                   <a href="#">Product</a>
@@ -57,13 +66,27 @@ function Header() {
           </div>
         </div>
 
-        <div className="btn" onClick={toggleLogin}>
+        <div
+          className="btn"
+          onClick={toggleLogin}
+          style={{ display: isPhone ? "flex" : "none" }}
+        >
           <p>Login</p>
         </div>
+        <TbLayoutListFilled
+          size={25}
+          style={{ cursor: "pointer", display: isPhone ? "none" : "flex" }}
+          onClick={toggleDropdown}
+        />
       </div>
 
       {/* Conditionally render the Login component based on isLoginVisible */}
       {isLoginVisible && <Login onClose={() => setLoginVisible(false)} />}
+      {isVisible && (
+        <div style={{marginTop:80,position:'absolute',right:10,zIndex:10}}>
+          <DropDown />
+        </div>
+      )}
     </div>
   );
 }

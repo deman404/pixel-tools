@@ -28,12 +28,11 @@ function Banner() {
       >
         <div
           style={{
-            width: isPhone ? "30%" : "50%",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             overflow: "hidden",
-            paddingTop: 130,
+            paddingTop: 80,
             zIndex: 1,
           }}
         >
@@ -42,7 +41,7 @@ function Banner() {
             style={{
               color: "#fff",
               margin: 0,
-              fontSize: isTablet ? 80 : 40,
+              fontSize: isTablet ? 70 : 40,
             }}
           >
             Built in Days
@@ -50,7 +49,7 @@ function Banner() {
           <h3
             className="fadeAnimation"
             style={{
-              color: "#0054FF",
+              color: "#0081fb",
               fontSize: isTablet ? 45 : 25,
               margin: 0,
             }}
@@ -61,10 +60,10 @@ function Banner() {
           <p
             className="fadeAnimation"
             style={{
-              fontSize: isTablet ? 18 : 13,
+              fontSize: isTablet ? 20 : 13,
               textAlign: "center",
               fontWeight: "bold",
-              textWrap: "inherit",
+              width:'50%'
             }}
           >
             SupraTools is the platform for developers to easily launch, publish,

@@ -3,6 +3,7 @@ import { TbMouseFilled, TbAppWindowFilled } from "react-icons/tb";
 //images
 import logo from "../images/logo.png";
 import globale from "../images/edge-functions-dark.svg";
+import graf from "../images/graf.png";
 //hooks
 import useWindowSize from "../Hooks/useWindowSize";
 function KnowComp() {
@@ -27,22 +28,27 @@ function KnowComp() {
           margin: 5,
           borderRadius: 10,
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: isPhone ? "space-between" : "center",
           alignItems: "center",
           border: "solid 1px #333",
         }}
       >
-        <div style={{ height: "100%", width: "50%" }}>
-          <h1 style={{ display: "flex", alignItems: "center" }}>How it work</h1>
+        <div
+          style={{
+            height: "100%",
+            width: isPhone ? "50%" : "100%",
+          }}
+        >
+          <h1>How it Works</h1>
           <ul>
             <li>
-              <p>Create your tools</p>
+              <p style={{ fontSize: 18 }}>Create Your Tools</p>
             </li>
             <li>
-              <p>Add it to suoraTools</p>
+              <p style={{ fontSize: 18 }}>Add Them to SupraTools</p>
             </li>
             <li>
-              <p>Get your audience</p>
+              <p style={{ fontSize: 18 }}>Reach Your Audience</p>
             </li>
           </ul>
         </div>
@@ -53,10 +59,10 @@ function KnowComp() {
             height: 250,
             border: "solid 1px #333",
             borderRadius: 10,
-            display: "flex",
+            display: isPhone ? "flex" : "none",
             justifyContent: "center",
             alignItems: "center",
-            marginRight: 50,
+            marginRight: 30,
           }}
         >
           <div
@@ -103,7 +109,12 @@ function KnowComp() {
                     alignItems: "center",
                   }}
                 >
-                  <img src={logo} alt="icon" style={{ width: 230 }} />
+                  <img
+                    src={logo}
+                    alt="icon"
+                    style={{ width: 230 }}
+                    className="imageShadow"
+                  />
                 </div>
               </div>
             </div>
@@ -114,7 +125,7 @@ function KnowComp() {
         className="fadeAnimation"
         style={{
           backgroundColor: "#242424",
-          width: isTablet ? "30%" : "100%",
+          width: isTablet ? "30%" : "106%",
           height: 320,
           margin: 5,
           borderRadius: 10,
@@ -127,6 +138,7 @@ function KnowComp() {
         }}
       >
         <img
+          className="imageShadow"
           src={globale}
           alt="globale"
           style={{
@@ -152,7 +164,7 @@ function KnowComp() {
           Reach the globale
         </div>
         <h1 style={{ position: "absolute", top: 0, padding: "5px 10px" }}>
-          get audience from the glob
+          Engage with a global audience
         </h1>
       </div>
 
@@ -160,14 +172,69 @@ function KnowComp() {
         className="fadeAnimation"
         style={{
           backgroundColor: "#242424",
-          width: isTablet ? "30%" : "100%",
-          height: 300,
-          padding: 10,
+          width: isTablet ? "30%" : "106%",
+          height: 320,
           margin: 5,
           borderRadius: 10,
+          position: "relative", // make the parent container relative
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          overflow: "hidden",
           border: "solid 1px #333",
         }}
-      ></div>
+      >
+        <img
+          src={graf}
+          alt="graf"
+          style={{
+            position: "absolute", // make the image fill the parent container
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover", // cover the entire container
+            zIndex: 0, // send the image behind the content
+            opacity:0.3
+          }}
+        />
+        <div
+          style={{
+            zIndex: 1,
+            color: "white",
+            position:"absolute",
+            right:"40%",
+            top:"45%"
+          }}
+        >
+          30k
+        </div>
+        <div
+          style={{
+            zIndex: 1,
+            color: "white",
+            position:"absolute",
+            right:"63%",
+            top:"56%"
+          }}
+        >
+          10k
+        </div>
+        <div
+          style={{
+            zIndex: 1,
+            color: "white",
+            position:"absolute",
+            right:"4%",
+            top:"35%"
+          }}
+        >
+          70k
+        </div>
+        <h1 style={{ position: "absolute", top: 0, padding: "5px 10px" }}>
+          Get all analytics to reach gools
+        </h1>
+      </div>
     </div>
   );
 }
