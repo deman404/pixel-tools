@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import "./header.css";
-import logo from "../images/logo.png";
 import { IoBagHandle } from "react-icons/io5";
 import useWindowSize from "../Hooks/useWindowSize";
 import Login from "./Login"; // Assuming the Login component is in the parent folder
 import { TbLayoutListFilled } from "react-icons/tb";
 import DropDown from "./DropDown";
-
+import { useTheme } from "../Hooks/ThemeContext";
+import { IoMoon } from "react-icons/io5";
+import { IoMdSunny } from "react-icons/io";
 function Header() {
   const size = useWindowSize();
   const [isLoginVisible, setLoginVisible] = useState(false);
@@ -19,9 +20,9 @@ function Header() {
   const toggleDropdown = () => {
     setVisible(!isVisible);
   };
-
+  const { theme, toggleTheme, themeStyles } = useTheme();
   return (
-    <div>
+    <div >
       <div
         className="header blur fadeDownAnimation"
         style={{
@@ -38,8 +39,8 @@ function Header() {
               alignItems: "center",
             }}
           >
-            <img src={logo} alt="logo" className="logo" />
-            <p style={{ color: "#ffffff", fontSize: 18, cursor: "pointer" }}>
+            <img src={themeStyles.logo} alt="logo" className="logo" />
+            <p style={{ color: themeStyles.textColor, fontSize: 18, cursor: "pointer" }}>
               <a href="/" style={{ color: "#fff", textDecoration: "none" }}>
                 SupraTools
               </a>
@@ -65,14 +66,30 @@ function Header() {
             </div>
           </div>
         </div>
-
         <div
-          className="btn"
-          onClick={toggleLogin}
-          style={{ display: isPhone ? "flex" : "none" }}
+          style={{
+            display: "flex",
+            justifyContent: "space-around",
+            alignItems: "center",
+            width: 130,
+          }}
         >
-          <p>Login</p>
+          <div
+            className="btn"
+            onClick={toggleLogin}
+            style={{ display: isPhone ? "flex" : "none" }}
+          >
+            <p>Login</p>
+          </div>
+          <div onClick={toggleTheme}>
+            {theme === "light" ? (
+              <IoMoon color="#fff" size={20} cursor={"pointer"} />
+            ) : (
+              <IoMdSunny color="#121212" size={20} cursor={"pointer"} />
+            )}
+          </div>
         </div>
+
         <TbLayoutListFilled
           size={25}
           style={{ cursor: "pointer", display: isPhone ? "none" : "flex" }}
@@ -83,12 +100,15 @@ function Header() {
       {/* Conditionally render the Login component based on isLoginVisible */}
       {isLoginVisible && <Login onClose={() => setLoginVisible(false)} />}
       {isVisible && (
-        <div style={{marginTop:80,position:'absolute',right:10,zIndex:10}}>
+        <div
+          style={{ marginTop: 80, position: "absolute", right: 10, zIndex: 10 }}
+        >
           <DropDown />
         </div>
       )}
     </div>
   );
 }
+const styles = {};
 
 export default Header;

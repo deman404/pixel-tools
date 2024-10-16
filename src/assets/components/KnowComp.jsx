@@ -14,18 +14,19 @@ function KnowComp() {
     <div
       style={{
         width: "80vw",
-        display: isTablet ? "flex" : "block",
+        display: "flex",
         marginTop: 20,
+        gap: "10px",
+        flexWrap: "wrap",
       }}
     >
       <div
         className="fadeAnimation"
         style={{
           backgroundColor: "#242424",
-          width: isTablet ? "50%" : "100%",
+          width: isTablet ? "35%" : "100%",
           height: 300,
           padding: 10,
-          margin: 5,
           borderRadius: 10,
           display: "flex",
           justifyContent: isPhone ? "space-between" : "center",
@@ -52,74 +53,12 @@ function KnowComp() {
             </li>
           </ul>
         </div>
-        <div
-          style={{
-            backgroundColor: "#262626",
-            width: 250,
-            height: 250,
-            border: "solid 1px #333",
-            borderRadius: 10,
-            display: isPhone ? "flex" : "none",
-            justifyContent: "center",
-            alignItems: "center",
-            marginRight: 30,
-          }}
-        >
-          <div
-            style={{
-              width: 220,
-              height: 220,
-              border: "solid 1px #333",
-              borderRadius: 20,
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <div
-              style={{
-                width: 180,
-                height: 180,
-                border: "solid 1px #333",
-                borderRadius: 30,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <div
-                style={{
-                  width: 140,
-                  height: 140,
-                  border: "solid 1px #333",
-                  borderRadius: 50,
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <div
-                  style={{
-                    width: 100,
-                    height: 100,
-                    border: "solid 1px #333",
-                    borderRadius: 60,
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <img
-                    src={logo}
-                    alt="icon"
-                    style={{ width: 230 }}
-                    className="imageShadow"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <img
+          src={logo}
+          alt="icon"
+          style={{ width: 180,display:isPhone ? "block":"none" }}
+          className="imageShadow"
+        />
       </div>
       <div
         className="fadeAnimation"
@@ -127,7 +66,6 @@ function KnowComp() {
           backgroundColor: "#242424",
           width: isTablet ? "30%" : "106%",
           height: 320,
-          margin: 5,
           borderRadius: 10,
           position: "relative", // make the parent container relative
           display: "flex",
@@ -174,7 +112,6 @@ function KnowComp() {
           backgroundColor: "#242424",
           width: isTablet ? "30%" : "106%",
           height: 320,
-          margin: 5,
           borderRadius: 10,
           position: "relative", // make the parent container relative
           display: "flex",
@@ -195,16 +132,16 @@ function KnowComp() {
             height: "100%",
             objectFit: "cover", // cover the entire container
             zIndex: 0, // send the image behind the content
-            opacity:0.3
+            opacity: 0.3,
           }}
         />
         <div
           style={{
             zIndex: 1,
             color: "white",
-            position:"absolute",
-            right:"40%",
-            top:"45%"
+            position: "absolute",
+            right: "40%",
+            top: "45%",
           }}
         >
           30k
@@ -213,9 +150,9 @@ function KnowComp() {
           style={{
             zIndex: 1,
             color: "white",
-            position:"absolute",
-            right:"63%",
-            top:"56%"
+            position: "absolute",
+            right: "63%",
+            top: "56%",
           }}
         >
           10k
@@ -224,9 +161,9 @@ function KnowComp() {
           style={{
             zIndex: 1,
             color: "white",
-            position:"absolute",
-            right:"4%",
-            top:"35%"
+            position: "absolute",
+            right: "4%",
+            top: "35%",
           }}
         >
           70k
