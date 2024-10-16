@@ -17,7 +17,7 @@ function Header() {
   return (
     <div>
       <div
-        className="header TopAnimation"
+        className="header blur fadeDownAnimation"
         style={{
           width: size.width > 800 ? "50%" : "90%",
           left: size.width > 800 ? "25%" : "2.5%",
@@ -26,24 +26,9 @@ function Header() {
         }}
       >
         <img src={logo} alt="logo" className="logo" />
-        <div
-          className="listNav"
-          style={{ display: size.width > 800 ? "flex" : "none" }}
-        >
-          <ul>
-            <li>
-              <a href="#">Home</a>
-            </li>
-            <li>
-              <a href="#">Last Deal</a>
-            </li>
-            <li>
-              <a href="#">Get Product</a>
-            </li>
-          </ul>
-        </div>
+        
         <div className="btn" onClick={toggleLogin}>
-          <IoBagHandle size={20} className="iconLogo" />
+          <p>Login</p>
         </div>
       </div>
 

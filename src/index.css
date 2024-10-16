@@ -5,12 +5,14 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: aliceblue;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  overflow-x: hidden;
 }
 
 a {
@@ -54,15 +56,24 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+
+@keyframes fade {
+  from{
+    opacity: 0;
   }
-  a:hover {
-    color: #747bff;
+  to{
+    opacity: 1;
   }
-  button {
-    background-color: #f9f9f9;
-  }
+}
+
+.fadeAnimation{
+  animation: fade 1.5s  ease-in-out;
+}
+.mouse {
+  
+  border: 1px solid #ffffff;
+  padding: 10px 5px;
+  border-radius: 5px;
+  transition: 0.3s ease-in-out;
+
 }

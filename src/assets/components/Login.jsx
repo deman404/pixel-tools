@@ -8,20 +8,22 @@ const Login = ({ onClose }) => {
   return (
     <div
       style={{
-        width: "100vw",
+        width: "100%",
         height: "100vh",
         background: "#0000007e",
-        zIndex: 5,
+        zIndex: 105,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         transition: "display 1s ease-in-out",
         position: "absolute",
+        top:0,
+        bottom:0,
+        overflow:"hidden"
       }}
     >
       <div
         style={{
-          height: "80%",
           width: "50%",
           background: "#ffffff",
           borderRadius: 10,
@@ -137,7 +139,7 @@ const Login = ({ onClose }) => {
             }}
           >
             <FcGoogle
-              size={40}
+              size={25}
               style={{
                 background: "#ededed",
                 padding: 8,
@@ -148,7 +150,7 @@ const Login = ({ onClose }) => {
               }}
             />
             <TbBrandGithubFilled
-              size={40}
+              size={25}
               style={{
                 background: "#ededed",
                 padding: 8,
