@@ -3,14 +3,4 @@
   backdrop-filter: blur(10.5px);
   -webkit-backdrop-filter: blur(10.5px);
 }
-.responsiveTitle {
-  color: #fff;
-  margin: 0;
-  font-size: 5vw; /* Default for larger screens */
-}
 
-@media (min-width: 600px) {
-  .responsiveTitle {
-    font-size: 50px; /* Adjust for larger devices */
-  }
-}

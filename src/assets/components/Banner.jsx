@@ -1,9 +1,11 @@
 //images
 import bnr1 from "../images/bnr1.png";
 //icons
-import { TbMouseFilled } from "react-icons/tb";
+import { TbMouseFilled, TbAppWindowFilled } from "react-icons/tb";
 //hooks
 import useWindowSize from "../Hooks/useWindowSize";
+//componenets
+import KnowComp from "./KnowComp";
 
 function Banner() {
   const size = useWindowSize();
@@ -40,7 +42,7 @@ function Banner() {
             style={{
               color: "#fff",
               margin: 0,
-              fontSize: isTablet ? 90 : 40,
+              fontSize: isTablet ? 80 : 40,
             }}
           >
             Built in Days
@@ -76,9 +78,7 @@ function Banner() {
             <p style={{ fontWeight: "bold", fontSize: 15 }}>Start Now</p>
           </div>
         </div>
-        <div
-          style={{ width: "100vw", height: 1500, backgroundColor: "#fff" }}
-        ></div>
+        <KnowComp/>
       </div>
     </>
   );
