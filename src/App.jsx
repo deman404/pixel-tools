@@ -15,7 +15,6 @@ import bg2 from "./assets/images/bg2.png";
 import { ThemeProvider } from "./assets/Hooks/ThemeContext";
 
 function App() {
-  const [count, setCount] = useState(0);
 
   return (
     <>

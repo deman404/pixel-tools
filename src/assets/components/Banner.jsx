@@ -4,6 +4,8 @@ import bnr1 from "../images/bnr1.png";
 import { TbMouseFilled, TbAppWindowFilled } from "react-icons/tb";
 //hooks
 import useWindowSize from "../Hooks/useWindowSize";
+import { useTheme } from "../Hooks/ThemeContext";
+
 //componenets
 import KnowComp from "./KnowComp";
 
@@ -11,6 +13,11 @@ function Banner() {
   const size = useWindowSize();
   const isPhone = size.width > 800;
   const isTablet = size.width > 1300;
+  const { theme } = useTheme();
+  const background = theme === 'light' ? 'aliceblue' : '#121212';
+  const backgroundCompt = theme === 'light' ? 'aliceblue' : '#121212';
+  const color = theme === 'light' ? '#000000' : 'aliceblue';
+
   return (
     <>
       <div
@@ -24,6 +31,7 @@ function Banner() {
           justifyContent: "center",
           alignItems: "center",
           zIndex: 1,
+          backgroundColor: background,
         }}
       >
         <div
@@ -39,7 +47,7 @@ function Banner() {
           <h1
             className="fadeAnimation"
             style={{
-              color: "#fff",
+              color: color,
               margin: 0,
               fontSize: isTablet ? 70 : 40,
             }}
@@ -63,7 +71,8 @@ function Banner() {
               fontSize: isTablet ? 20 : 13,
               textAlign: "center",
               fontWeight: "bold",
-              width:'50%'
+              width:'50%',
+              color:color,
             }}
           >
             SupraTools is the platform for developers to easily launch, publish,

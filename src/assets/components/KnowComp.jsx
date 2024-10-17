@@ -6,10 +6,18 @@ import globale from "../images/edge-functions-dark.svg";
 import graf from "../images/graf.png";
 //hooks
 import useWindowSize from "../Hooks/useWindowSize";
+import { useTheme } from "../Hooks/ThemeContext";
+
 function KnowComp() {
   const size = useWindowSize();
   const isPhone = size.width > 800;
   const isTablet = size.width > 1300;
+  const { theme } = useTheme();
+  const background = theme === "light" ? "aliceblue" : "#121212";
+  const backgroundCompt = theme === "light" ? "#ffffff" : "#242424";
+  const color = theme === "light" ? "#000000" : "aliceblue";
+  const border = theme === "light" ? "#ededed" : "#333";
+
   return (
     <div
       style={{
@@ -23,7 +31,7 @@ function KnowComp() {
       <div
         className="fadeAnimation"
         style={{
-          backgroundColor: "#242424",
+          backgroundColor: backgroundCompt,
           width: isTablet ? "35%" : "100%",
           height: 300,
           padding: 10,
@@ -31,7 +39,9 @@ function KnowComp() {
           display: "flex",
           justifyContent: isPhone ? "space-between" : "center",
           alignItems: "center",
-          border: "solid 1px #333",
+          borderColor: border,
+          borderWidth: 1,
+          borderStyle: "solid",
         }}
       >
         <div
@@ -40,39 +50,43 @@ function KnowComp() {
             width: isPhone ? "50%" : "100%",
           }}
         >
-          <h1>How it Works</h1>
+          <h1 style={{ color: color }}>How it Works</h1>
           <ul>
             <li>
-              <p style={{ fontSize: 18 }}>Create Your Tools</p>
+              <p style={{ fontSize: 18, color: color }}>Create Your Tools</p>
             </li>
             <li>
-              <p style={{ fontSize: 18 }}>Add Them to SupraTools</p>
+              <p style={{ fontSize: 18, color: color }}>
+                Add Them to SupraTools
+              </p>
             </li>
             <li>
-              <p style={{ fontSize: 18 }}>Reach Your Audience</p>
+              <p style={{ fontSize: 18, color: color }}>Reach Your Audience</p>
             </li>
           </ul>
         </div>
         <img
           src={logo}
           alt="icon"
-          style={{ width: 180,display:isPhone ? "block":"none" }}
+          style={{ width: 180, display: isPhone ? "block" : "none" }}
           className="imageShadow"
         />
       </div>
       <div
         className="fadeAnimation"
         style={{
-          backgroundColor: "#242424",
+          backgroundColor: backgroundCompt,
           width: isTablet ? "30%" : "106%",
           height: 320,
           borderRadius: 10,
-          position: "relative", // make the parent container relative
+          position: "relative",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           overflow: "hidden",
-          border: "solid 1px #333",
+          borderColor: border,
+          borderWidth: 1,
+          borderStyle: "solid",
         }}
       >
         <img
@@ -92,16 +106,18 @@ function KnowComp() {
         <div
           style={{
             zIndex: 1,
-            color: "white",
-            backgroundColor: "#242424",
+            color: color,
+            backgroundColor: backgroundCompt,
             padding: "5px 15px",
             borderRadius: 10,
-            border: "solid 1px #333",
+            borderColor: border,
+            borderWidth: 1,
+            borderStyle: "solid",
           }}
         >
           Reach the globale
         </div>
-        <h1 style={{ position: "absolute", top: 0, padding: "5px 10px" }}>
+        <h1 style={{ position: "absolute", top: 0, padding: "5px 10px",color:color }}>
           Engage with a global audience
         </h1>
       </div>
@@ -109,7 +125,7 @@ function KnowComp() {
       <div
         className="fadeAnimation"
         style={{
-          backgroundColor: "#242424",
+          backgroundColor: backgroundCompt,
           width: isTablet ? "30%" : "106%",
           height: 320,
           borderRadius: 10,
@@ -118,7 +134,9 @@ function KnowComp() {
           justifyContent: "center",
           alignItems: "center",
           overflow: "hidden",
-          border: "solid 1px #333",
+          borderColor: border,
+          borderWidth: 1,
+          borderStyle: "solid",
         }}
       >
         <img
@@ -132,13 +150,13 @@ function KnowComp() {
             height: "100%",
             objectFit: "cover", // cover the entire container
             zIndex: 0, // send the image behind the content
-            opacity: 0.3,
+            opacity: 0.8,
           }}
         />
         <div
           style={{
             zIndex: 1,
-            color: "white",
+            color: color,
             position: "absolute",
             right: "40%",
             top: "45%",
@@ -149,7 +167,7 @@ function KnowComp() {
         <div
           style={{
             zIndex: 1,
-            color: "white",
+            color: color,
             position: "absolute",
             right: "63%",
             top: "56%",
@@ -160,7 +178,7 @@ function KnowComp() {
         <div
           style={{
             zIndex: 1,
-            color: "white",
+            color: color,
             position: "absolute",
             right: "4%",
             top: "35%",
@@ -168,7 +186,7 @@ function KnowComp() {
         >
           70k
         </div>
-        <h1 style={{ position: "absolute", top: 0, padding: "5px 10px" }}>
+        <h1 style={{ position: "absolute", top: 0, padding: "5px 10px",color:color }}>
           Get all analytics to reach gools
         </h1>
       </div>

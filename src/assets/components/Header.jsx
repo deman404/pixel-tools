@@ -5,14 +5,18 @@ import useWindowSize from "../Hooks/useWindowSize";
 import Login from "./Login"; // Assuming the Login component is in the parent folder
 import { TbLayoutListFilled } from "react-icons/tb";
 import DropDown from "./DropDown";
-import { useTheme } from "../Hooks/ThemeContext";
 import { IoMoon } from "react-icons/io5";
 import { IoMdSunny } from "react-icons/io";
+import logo from "../images/logo.png";
+import { useTheme } from "../Hooks/ThemeContext";
 function Header() {
   const size = useWindowSize();
   const [isLoginVisible, setLoginVisible] = useState(false);
   const isPhone = size.width > 800;
   const [isVisible, setVisible] = useState(false);
+  const { theme, toggleTheme } = useTheme();
+  const background = theme === 'light' ? 'aliceblue' : '#121212';
+  const color = theme === 'light' ? '#000000' : 'aliceblue';
 
   const toggleLogin = () => {
     setLoginVisible((prev) => !prev);
@@ -20,9 +24,8 @@ function Header() {
   const toggleDropdown = () => {
     setVisible(!isVisible);
   };
-  const { theme, toggleTheme, themeStyles } = useTheme();
   return (
-    <div >
+    <div>
       <div
         className="header blur fadeDownAnimation"
         style={{
@@ -39,28 +42,34 @@ function Header() {
               alignItems: "center",
             }}
           >
-            <img src={themeStyles.logo} alt="logo" className="logo" />
-            <p style={{ color: themeStyles.textColor, fontSize: 18, cursor: "pointer" }}>
-              <a href="/" style={{ color: "#fff", textDecoration: "none" }}>
+            <img src={logo} alt="logo" className="logo" />
+            <p style={{ fontSize: 18, cursor: "pointer" }}>
+              <a
+                href="/"
+                style={{
+                  color: color,
+                  textDecoration: "none",
+                }}
+              >
                 SupraTools
               </a>
             </p>
             <div
               className="listNav"
-              style={{ display: isPhone ? "flex" : "none" }}
+              style={{ display: isPhone ? "flex" : "none", }}
             >
-              <ul>
-                <li>
-                  <a href="#">Product</a>
+              <ul >
+                <li >
+                  <a href="#" style={{color: color}}>Product</a>
                 </li>
                 <li>
-                  <a href="#">Developers</a>
+                  <a href="#" style={{color: color}}>Developers</a>
                 </li>
                 <li>
-                  <a href="#">Pricing</a>
+                  <a href="#" style={{color: color}}>Pricing</a>
                 </li>
                 <li>
-                  <a href="#">Docs</a>
+                  <a href="#" style={{color: color}}>Docs</a>
                 </li>
               </ul>
             </div>
@@ -81,11 +90,11 @@ function Header() {
           >
             <p>Login</p>
           </div>
-          <div onClick={toggleTheme}>
+          <div onClick={toggleTheme} style={{ cursor: "pointer" }}>
             {theme === "light" ? (
-              <IoMoon color="#fff" size={20} cursor={"pointer"} />
+              <IoMoon color="#121212" size={20} />
             ) : (
-              <IoMdSunny color="#121212" size={20} cursor={"pointer"} />
+              <IoMdSunny color="#ffffff" size={20} />
             )}
           </div>
         </div>

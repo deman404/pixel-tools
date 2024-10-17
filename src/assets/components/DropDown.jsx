@@ -1,74 +1,141 @@
 import React from "react";
-import styled from "styled-components";
+//hooks
+import { useTheme } from "../Hooks/ThemeContext";
 
 const Radio = () => {
+  const { theme } = useTheme();
+  const background = theme === "light" ? "aliceblue" : "#121212";
+  const backgroundCompt = theme === "light" ? "#ffffff" : "#242424";
+  const color = theme === "light" ? "#000000" : "aliceblue";
+  const border = theme === "light" ? "#ededed" : "#333";
   return (
-    <StyledWrapper>
-      <div className="input">
-        <button className="value">Product</button>
-        <button className="value">Developers</button>
-        <button className="value">Pricing</button>
-        <button className="value">Docs</button>
-        <button className="value">Login</button>
-      </div>
-    </StyledWrapper>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        width: "200px",
+        backgroundColor: backgroundCompt,
+        justifyContent: "center",
+        borderRadius: "5px",
+        borderColor: border,
+        borderWidth: 1,
+        borderStyle: "solid",
+        padding: 5,
+        gap: 5,
+      }}
+    >
+      <button
+        className="value"
+        style={{
+          backgroundColor: "transparent",
+          borderColor: border,
+          borderWidth: 1,
+          borderStyle: "solid",
+          padding: "10px",
+          color: color,
+          display: "flex",
+          position: "relative",
+          gap: "5px",
+          cursor: "pointer",
+          borderRadius: "4px",
+        }}
+        onMouseOver={(e) => (e.target.style.backgroundColor = background)}
+        onMouseOut={(e) => (e.target.style.backgroundColor = "transparent")}
+        onFocus={(e) => (e.target.style.backgroundColor = background)}
+        onBlur={(e) => (e.target.style.backgroundColor = "transparent")}
+      >
+        Product
+      </button>
+      <button
+        className="value"
+        style={{
+          backgroundColor: "transparent",
+          borderColor: border,
+          borderWidth: 1,
+          borderStyle: "solid",
+          padding: "10px",
+          color:color,
+          display: "flex",
+          position: "relative",
+          gap: "5px",
+          cursor: "pointer",
+          borderRadius: "4px",
+        }}
+        onMouseOver={(e) => (e.target.style.backgroundColor = background)}
+        onMouseOut={(e) => (e.target.style.backgroundColor = "transparent")}
+        onFocus={(e) => (e.target.style.backgroundColor = background)}
+        onBlur={(e) => (e.target.style.backgroundColor = "transparent")}
+      >
+        Developers
+      </button>
+      <button
+        className="value"
+        style={{
+          backgroundColor: "transparent",
+          borderColor: border,
+          borderWidth: 1,
+          borderStyle: "solid",
+          padding: "10px",
+          color: color,
+          display: "flex",
+          position: "relative",
+          gap: "5px",
+          cursor: "pointer",
+          borderRadius: "4px",
+        }}
+        onMouseOver={(e) => (e.target.style.backgroundColor = background)}
+        onMouseOut={(e) => (e.target.style.backgroundColor = "transparent")}
+        onFocus={(e) => (e.target.style.backgroundColor = background)}
+        onBlur={(e) => (e.target.style.backgroundColor = "transparent")}
+      >
+        Pricing
+      </button>
+      <button
+        className="value"
+        style={{
+          backgroundColor: "transparent",
+          borderColor: border,
+          borderWidth: 1,
+          borderStyle: "solid",
+          padding: "10px",
+          color: color,
+          display: "flex",
+          position: "relative",
+          gap: "5px",
+          cursor: "pointer",
+          borderRadius: "4px",
+        }}
+        onMouseOver={(e) => (e.target.style.backgroundColor = background)}
+        onMouseOut={(e) => (e.target.style.backgroundColor = "transparent")}
+        onFocus={(e) => (e.target.style.backgroundColor = background)}
+        onBlur={(e) => (e.target.style.backgroundColor = "transparent")}
+      >
+        Docs
+      </button>
+      <button
+        className="value"
+        style={{
+          backgroundColor: "transparent",
+          borderColor: border,
+          borderWidth: 1,
+          borderStyle: "solid",
+          padding: "10px",
+          color: color,
+          display: "flex",
+          position: "relative",
+          gap: "5px",
+          cursor: "pointer",
+          borderRadius: "4px",
+        }}
+        onMouseOver={(e) => (e.target.style.backgroundColor = background)}
+        onMouseOut={(e) => (e.target.style.backgroundColor = "transparent")}
+        onFocus={(e) => (e.target.style.backgroundColor = background)}
+        onBlur={(e) => (e.target.style.backgroundColor = "transparent")}
+      >
+        Login
+      </button>
+    </div>
   );
 };
-
-const StyledWrapper = styled.div`
-  .input {
-    display: flex;
-    flex-direction: column;
-    width: 200px;
-    background-color: #121212;
-    justify-content: center;
-    border-radius: 5px;
-    border: "solid 1px #333";
-  }
-
-  .value {
-    background-color: transparent;
-    border: "solid 1px #333";
-    padding: 10px;
-    color: white;
-    display: flex;
-    position: relative;
-    gap: 5px;
-    cursor: pointer;
-    border-radius: 4px;
-  }
-
-  .value:not(:active):hover,
-  .value:focus {
-    background-color: #21262c;
-  }
-
-  .value:focus,
-  .value:active {
-    background-color: #1a1f24;
-    outline: none;
-  }
-
-  .value::before {
-    content: "";
-    position: absolute;
-    top: 5px;
-    left: -10px;
-    width: 5px;
-    height: 80%;
-    background-color: #2f81f7;
-    border-radius: 5px;
-    opacity: 0;
-  }
-
-  .value:focus::before,
-  .value:active::before {
-    opacity: 1;
-  }
-
-  .value svg {
-    width: 15px;
-  }
-`;
 
 export default Radio;

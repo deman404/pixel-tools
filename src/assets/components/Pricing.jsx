@@ -3,11 +3,17 @@ import Box from "./Box";
 
 //hooks
 import useWindowSize from "../Hooks/useWindowSize";
+import { useTheme } from "../Hooks/ThemeContext";
 
 const Pricing = () => {
   const size = useWindowSize();
   const isPhone = size.width > 800;
   const isTablet = size.width > 1300;
+  const { theme } = useTheme();
+  const background = theme === "light" ? "aliceblue" : "#121212";
+  const backgroundCompt = theme === "light" ? "#ffffff" : "#242424";
+  const color = theme === "light" ? "#000000" : "aliceblue";
+  const border = theme === "light" ? "#ededed" : "#333";
   const featureBox1 = [
     "post one app or tool",
     "Email support",
@@ -42,6 +48,7 @@ const Pricing = () => {
   return (
     <div
       style={{
+        backgroundColor:background,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -53,7 +60,7 @@ const Pricing = () => {
       <h1
         className="fadeDownAnimation"
         style={{
-          color: "#fff",
+          color: color,
           margin: 0,
           fontSize: isTablet ? 70 : 40,
         }}
