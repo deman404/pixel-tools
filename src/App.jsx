@@ -8,6 +8,7 @@ import Header from "./assets/components/Header";
 import Banner from "./assets/components/Banner";
 import CoockisModal from "./assets/components/CoockisModal";
 import Pricing from "./assets/components/Pricing";
+import Developper from "./assets/components/Developper";
 // images
 import bg1 from "./assets/images/bg1.png";
 import bg2 from "./assets/images/bg2.png";
@@ -22,6 +23,7 @@ function App() {
         <Header />
         <Banner />
         <Pricing />
+        <Developper/>
       </ThemeProvider>
       <CoockisModal />
     </>

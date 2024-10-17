@@ -72,3 +72,35 @@ body {
 .fadeInRight {
   animation: fadeInRight ease-in-out 3s ;
 }
+
+.quote {
+  position: relative;
+  font-style: italic;
+  padding: 10px;
+  margin: 20px;
+}
+
+.quote::before {
+  content:open-quote;
+  font-size: 30px;
+  color: #6362ed;
+  position: absolute;
+  left: -20px;
+  top: -10px;
+}
+
+.quote::after {
+  content: close-quote;
+  font-size: 30px;
+  color: #6362ed;
+  position: absolute;
+  right: -20px;
+  bottom: -10px;
+}
+
+.hover{
+  color: aliceblue;
+}
+.hover:hover{
+  color: #0081fb;
+}

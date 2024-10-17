@@ -101,7 +101,7 @@ function Header() {
 
         <TbLayoutListFilled
           size={25}
-          style={{ cursor: "pointer", display: isPhone ? "none" : "flex" }}
+          style={{ cursor: "pointer", display: isPhone ? "none" : "flex" ,color:color}}
           onClick={toggleDropdown}
         />
       </div>
