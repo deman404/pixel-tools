@@ -84,6 +84,7 @@ const Pricing = () => {
           btnClass="btn-outline-primary"
           btnTitle="Sign up for free"
           feature={featureBox1}
+          link="/login"
         />
         <Box
           feature={featureBox2}

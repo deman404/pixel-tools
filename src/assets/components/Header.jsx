@@ -2,28 +2,29 @@ import React, { useState } from "react";
 import "./header.css";
 import { IoBagHandle } from "react-icons/io5";
 import useWindowSize from "../Hooks/useWindowSize";
-import Login from "./Login"; // Assuming the Login component is in the parent folder
+import Login from "../pages/Login"; // Keep this as the Login component import
 import { TbLayoutListFilled } from "react-icons/tb";
 import DropDown from "./DropDown";
 import { IoMoon } from "react-icons/io5";
 import { IoMdSunny } from "react-icons/io";
 import logo from "../images/logo.png";
 import { useTheme } from "../Hooks/ThemeContext";
+
 function Header() {
   const size = useWindowSize();
   const [isLoginVisible, setLoginVisible] = useState(false);
   const isPhone = size.width > 800;
   const [isVisible, setVisible] = useState(false);
   const { theme, toggleTheme } = useTheme();
-  const background = theme === 'light' ? 'aliceblue' : '#121212';
-  const color = theme === 'light' ? '#000000' : 'aliceblue';
+  const background = theme === "light" ? "aliceblue" : "#121212";
+  const color = theme === "light" ? "#000000" : "aliceblue";
 
-  const toggleLogin = () => {
-    setLoginVisible((prev) => !prev);
-  };
   const toggleDropdown = () => {
     setVisible(!isVisible);
   };
+
+  
+
   return (
     <div>
       <div
@@ -56,20 +57,28 @@ function Header() {
             </p>
             <div
               className="listNav"
-              style={{ display: isPhone ? "flex" : "none", }}
+              style={{ display: isPhone ? "flex" : "none" }}
             >
-              <ul >
-                <li >
-                  <a href="#" style={{color: color}}>Product</a>
+              <ul>
+                <li>
+                  <a href="#" style={{ color: color }}>
+                    Product
+                  </a>
                 </li>
                 <li>
-                  <a href="#" style={{color: color}}>Developers</a>
+                  <a href="#" style={{ color: color }}>
+                    Developers
+                  </a>
                 </li>
                 <li>
-                  <a href="#" style={{color: color}}>Pricing</a>
+                  <a href="#" style={{ color: color }}>
+                    Pricing
+                  </a>
                 </li>
                 <li>
-                  <a href="#" style={{color: color}}>Docs</a>
+                  <a href="#" style={{ color: color }}>
+                    Docs
+                  </a>
                 </li>
               </ul>
             </div>
@@ -85,10 +94,9 @@ function Header() {
         >
           <div
             className="btn"
-            onClick={toggleLogin}
             style={{ display: isPhone ? "flex" : "none" }}
           >
-            <p>Login</p>
+            <a href="/login" style={{textDecoration:"none",color:"#ffffff"}}><p>Login</p></a> 
           </div>
           <div onClick={toggleTheme} style={{ cursor: "pointer" }}>
             {theme === "light" ? (
@@ -101,13 +109,15 @@ function Header() {
 
         <TbLayoutListFilled
           size={25}
-          style={{ cursor: "pointer", display: isPhone ? "none" : "flex" ,color:color}}
+          style={{
+            cursor: "pointer",
+            display: isPhone ? "none" : "flex",
+            color: color,
+          }}
           onClick={toggleDropdown}
         />
       </div>
 
-      {/* Conditionally render the Login component based on isLoginVisible */}
-      {isLoginVisible && <Login onClose={() => setLoginVisible(false)} />}
       {isVisible && (
         <div
           style={{ marginTop: 80, position: "absolute", right: 10, zIndex: 10 }}
@@ -118,6 +128,5 @@ function Header() {
     </div>
   );
 }
-const styles = {};
 
 export default Header;

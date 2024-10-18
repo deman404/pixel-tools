@@ -4,7 +4,7 @@ import React from "react";
 import { useTheme } from "../Hooks/ThemeContext";
 
 const Box = (props) => {
-  const { title, btnClass, btnTitle, price, feature } = props;
+  const { title, btnClass, btnTitle, price, feature,link } = props;
   const { theme } = useTheme();
   const background = theme === "light" ? "aliceblue" : "#121212";
   const backgroundCompt = theme === "light" ? "#ffffff" : "#242424";
@@ -77,7 +77,9 @@ const Box = (props) => {
           cursor: "pointer",
         }}
       >
-        {btnTitle}
+        <a href={link} style={{ textDecoration: "none", color: "#ffffff" }}>
+          {btnTitle}
+        </a>
       </button>
     </div>
   );

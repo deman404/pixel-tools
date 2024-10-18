@@ -83,7 +83,7 @@ function Banner() {
             className="btn fadeAnimation"
             style={{ padding: "5px 15px", marginTop: 10 }}
           >
-            <p style={{ fontWeight: "bold", fontSize: 15 }}>Start Now</p>
+            <a href="/login" style={{textDecoration:"none",color:"#ffffff"}}><p style={{ fontWeight: "bold", fontSize: 15 }}>Start Now</p></a>
           </div>
         </div>
         <KnowComp/>
