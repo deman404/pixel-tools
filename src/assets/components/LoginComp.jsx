@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 //suprabase imports
 import { createClient } from "@supabase/supabase-js";
 import { Auth } from "@supabase/auth-ui-react";
@@ -18,8 +19,10 @@ import useWindowSize from "../Hooks/useWindowSize";
 
 //Modals
 import AlertModal from "./AlertModal";
+import CoockisModal from "./CoockisModal";
 
 function LoginComp() {
+  const navigate = useNavigate();
   const size = useWindowSize();
   const isPhone = size.width > 800;
   const isTablet = size.width > 1300;
@@ -29,6 +32,28 @@ function LoginComp() {
   const backgroundCompt = theme === "light" ? "#ffffff" : "#242424";
   const color = theme === "light" ? "#000000" : "aliceblue";
   const border = theme === "light" ? "#ededed" : "#333";
+  const [isLogiedIn , setLogin] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+
+  //coockis handler
+  const setCookie = (name, value, days) => {
+    const expires = new Date(
+      Date.now() + days * 24 * 60 * 60 * 1000
+    ).toUTCString();
+    document.cookie = `${name}=${value}; expires=${expires}; path=/`;
+  };
+
+  const getCookie = (name) => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(";").shift();
+    return null;
+  };
+
+  const acceptCookies = () => {
+    setCookie("LoginContent", "true", 30); // Set a cookie for 30 days
+    setIsVisible(false);
+  };
 
   // login logic
   const SUPABASE_KEY =
@@ -49,7 +74,8 @@ function LoginComp() {
       }
 
       console.log("OAuth login successful:", data);
-      // add navigation to a new page
+      acceptCookies();
+
     } catch (error) {
       console.error("Unexpected error during login:", error);
     }
@@ -68,7 +94,7 @@ function LoginComp() {
       }
 
       console.log("OAuth login successful:", data);
-      setSuccessMessage("Sign-up successful! please wait...");
+      acceptCookies();
 
       // add navigation to a new page
     } catch (error) {
@@ -81,26 +107,19 @@ function LoginComp() {
     const { error } = await supabase.auth.signOut();
   };
 
-  //create account with email and password
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
+  
 
-  const signUpNewUser = async (e) => {
-    e.preventDefault();
-
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-    });
-
-    if (error) {
-      setErrorMessage(error.message);
-    } else {
-      setSuccessMessage("Sign-up successful! Please check your email.");
+  useEffect(() => {
+    const consent = getCookie("LoginContent");
+    if (!consent) {
+      console.log('is not login in')
+    }else{
+      setLogin(true);
+      console.log('is onready login in')
     }
-  };
+    
+    
+  }, []);
 
   return (
     <>

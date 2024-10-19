@@ -9,6 +9,11 @@ import { IoBagHandle } from "react-icons/io5";
 import { TbLayoutListFilled } from "react-icons/tb";
 import { IoMoon } from "react-icons/io5";
 import { IoMdSunny } from "react-icons/io";
+import { LuAppWindow } from "react-icons/lu";
+import { BsTools } from "react-icons/bs";
+import { BsFillCreditCardFill } from "react-icons/bs";
+import { FaUserTie } from "react-icons/fa";
+import { RiNotification4Fill } from "react-icons/ri";
 //Hooks
 import useWindowSize from "../Hooks/useWindowSize";
 import { useTheme } from "../Hooks/ThemeContext";
@@ -19,73 +24,45 @@ import DropDown from "./DropDown";
 //Images
 import logo from "../images/logo.png";
 
-//btn handler changer
-const LoginBtn = () => {
-  return (
-    <div className="btn">
-      <a href="/Login" style={{ textDecoration: "none", color: "#ffffff" }}>
-        <p>Login</p>
-      </a>
-    </div>
-  );
-};
-
-const ProfileBtn = () => {
-  return (
-    <div className="btn">
-      <a href="/Home" style={{ textDecoration: "none", color: "#ffffff" }}>
-        <p>Profile</p>
-      </a>
-    </div>
-  );
-};
-
-function Header() {
+function HeaderHome() {
   const navigate = useNavigate();
   const size = useWindowSize();
-  const [isLoginVisible, setLoginVisible] = useState(false);
   const isPhone = size.width > 800;
   const [isVisible, setVisible] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const background = theme === "light" ? "aliceblue" : "#121212";
+  const backgroundCompt = theme === "light" ? "#ffffff" : "#242424";
   const color = theme === "light" ? "#000000" : "aliceblue";
+  const border = theme === "light" ? "#ededed" : "#333";
 
   const toggleDropdown = () => {
     setVisible(!isVisible);
   };
-
-  //coockis handler
-  const setCookie = (name, value, days) => {
-    const expires = new Date(
-      Date.now() + days * 24 * 60 * 60 * 1000
-    ).toUTCString();
-    document.cookie = `${name}=${value}; expires=${expires}; path=/`;
+  const IconBtn = {
+    margin: 0,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    background: backgroundCompt,
+    padding: "5px 10px",
+    borderRadius: 10,
+    width: 50,
+    cursor: "pointer",
   };
-
-  const getCookie = (name) => {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(";").shift();
-    return null;
+  const inputatyles = {
+    background: backgroundCompt,
+    padding: 8,
+    borderRadius: 5,
+    cursor: "text",
+    height:25,
+    border: border,
+    borderWidth: 1,
+    borderStyle: "solid",
+    width: 350,
+    margin: 10,
   };
-
-  const acceptCookies = () => {
-    setCookie("LoginContent", "true", 30); // Set a cookie for 30 days
-  };
-
-  //use effect
-  useEffect(() => {
-    const consent = getCookie("LoginContent");
-    if (!consent) {
-      console.log("is not login in");
-      setIsLoggedIn(false);
-    } else {
-      console.log("is onready login in");
-      setIsLoggedIn(true);
-      navigate("/Home")
-    }
-  }, []);
 
   return (
     <div>
@@ -118,52 +95,41 @@ function Header() {
               </a>
             </p>
             <div
-              className="listNav"
+              className="SearchBar"
               style={{ display: isPhone ? "flex" : "none" }}
             >
-              <ul>
-                <li>
-                  <a href="#" style={{ color: color }}>
-                    Product
-                  </a>
-                </li>
-                <li>
-                  <a href="#" style={{ color: color }}>
-                    Developers
-                  </a>
-                </li>
-                <li>
-                  <a href="#" style={{ color: color }}>
-                    Pricing
-                  </a>
-                </li>
-                <li>
-                  <a href="#" style={{ color: color }}>
-                    Docs
-                  </a>
-                </li>
-              </ul>
+              <input
+                type="text"
+                name="Search"
+                id="search"
+                placeholder="Searsh..."
+                style={inputatyles}
+              />
             </div>
           </div>
         </div>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-around",
-            alignItems: "center",
-            width: 130,
-          }}
-        >
-          {isLoggedIn ? <ProfileBtn /> : <LoginBtn />}
-          <div onClick={toggleTheme} style={{ cursor: "pointer" }}>
-            {theme === "light" ? (
-              <IoMoon color="#121212" size={20} />
-            ) : (
-              <IoMdSunny color="#ffffff" size={20} />
-            )}
+        <div style={{ display: "flex", justifyContent: "center", gap: 10 }}>
+          <div className="apps" style={IconBtn}>
+            <LuAppWindow size={20} />
+            <p style={{ margin: 0, fontSize: 15 }}>Apps</p>
+          </div>
+          <div className="Tools" style={IconBtn}>
+            <BsTools size={20} />
+            <p style={{ margin: 0, fontSize: 15 }}>Tools</p>
+          </div>
+          <div className="Plan" style={IconBtn}>
+            <BsFillCreditCardFill size={20} />
+            <p style={{ margin: 0, fontSize: 15 }}>Plans</p>
+          </div>
+          <div className="Profile" style={IconBtn}>
+            <FaUserTie size={20} />
+            <p style={{ margin: 0, fontSize: 15 }}>Profile</p>
+          </div>
+          <div className="Notify" style={IconBtn}>
+            <RiNotification4Fill size={20} />
+            <p style={{ margin: 0, fontSize: 15 }}>Notify</p>
           </div>
         </div>
-
         <TbLayoutListFilled
           size={25}
           style={{
@@ -186,4 +152,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default HeaderHome;
