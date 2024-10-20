@@ -121,7 +121,7 @@ function HeaderHome() {
             <BsFillCreditCardFill size={20} />
             <p style={{ margin: 0, fontSize: 15 }}>Plans</p>
           </div>
-          <div className="Profile" style={IconBtn}>
+          <div className="Profile" style={IconBtn} onClick={() => navigate("/Profile")}>
             <FaUserTie size={20} />
             <p style={{ margin: 0, fontSize: 15 }}>Profile</p>
           </div>

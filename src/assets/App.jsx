@@ -8,7 +8,7 @@ import "./App.css";
 import Landing from "./pages/Landing";
 import Login from "../assets/pages/Login";
 import Home from "./pages/Home";
-
+import Profile from "./pages/Profile";
 function App() {
   return (
     <>
@@ -17,6 +17,8 @@ function App() {
           <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/Home" element={<Home/>}/>
+          <Route path="/Profile" element={<Profile/>}/>
+
         </Routes>
       </Router>
     </>
