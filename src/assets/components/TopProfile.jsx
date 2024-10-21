@@ -28,11 +28,15 @@ import DropDown from "./DropDown";
 //Images
 import logo from "../images/logo.png";
 
+//firebase 
+import { auth, db } from '../../../firebase';
+import { ref, onValue,update } from 'firebase/database';
+
 function TopProfile({UserName}) {
   const navigate = useNavigate();
   const size = useWindowSize();
   const isPhone = size.width > 800;
-  const [isVisible, setVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const background = theme === "light" ? "aliceblue" : "#121212";
@@ -47,7 +51,7 @@ function TopProfile({UserName}) {
   //styles
   const ImageBanner = {
     width: "100%",
-    height: 230,
+    height: 130,
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
     borderBottom: "solid 1px #333",
@@ -66,8 +70,8 @@ function TopProfile({UserName}) {
     borderRadius: 180,
   };
   const imageProfile = {
-    width: 150,
-    height: 150,
+    width: 100,
+    height: 100,
     borderRadius: 180,
     position: "relative",
     left: 25,
@@ -75,10 +79,65 @@ function TopProfile({UserName}) {
     border: border,
   };
 
+  const [userData, setUserData] = useState(null);
+
+
+  // Get the current logged-in user
+  const user = auth.currentUser;
+
+  //coockis handler
+  const setCookie = (name, value, days) => {
+    const expires = new Date(
+      Date.now() + days * 24 * 60 * 60 * 1000
+    ).toUTCString();
+    document.cookie = `${name}=${value}; expires=${expires}; path=/`;
+  };
+
+  const getCookie = (name) => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(";").shift();
+    return null;
+  };
+
+  const acceptCookies = () => {
+    setCookie("LoginContent", "true", 30); // Set a cookie for 30 days
+    setIsVisible(false);
+  };
+
+  useEffect(() => {
+    if (user) {
+      // Fetch user data from Realtime Database
+      const userRef = ref(db, 'users/' + user.uid);
+      
+      onValue(userRef, (snapshot) => {
+        if (snapshot.exists()) {
+          setUserData(snapshot.val());
+        } else {
+          console.log("No data available");
+        }
+      });
+    }
+    const consent = getCookie("LoginContent");
+    if (!consent) {
+      console.log("is not login in");
+      navigate("/")      
+    } else {
+      console.log("is onready login in");
+
+    }
+  }, [user]);
+
+  if (!user) {
+    console.log("login first");
+    navigate("/")
+  }
+
+
   return (
     <>
       <div
-        style={{ width: "100%", height: 350, borderBottom: "solid 1px #333" }}
+        style={{ width: "100%", height: 200, borderBottom: "solid 1px #333" }}
       >
         <div className="banner" style={ImageBanner}>
           <img src={banerImage} alt="" style={baner} />
@@ -87,11 +146,11 @@ function TopProfile({UserName}) {
           style={{
             display: "flex",
             width: "100%",
-            height: 120,
+            height: 70,
           }}
         >
           <div className="Profile" style={imageProfile}>
-            <img src={profileUser} alt="" style={Profle} />
+            <img src={userData.profilePicture} alt="" style={Profle} />
           </div>
           <div
             style={{
@@ -102,7 +161,7 @@ function TopProfile({UserName}) {
               justifyContent: "space-between",
             }}
           >
-            <h1 style={{ color: color }}>{"@" + UserName}</h1>
+            <h1 style={{ color: color }}>{"@" + userData.name}</h1>
             {/* Social Media Icons */}
             <div style={{ display: "flex",gap:10 }}>
               <a

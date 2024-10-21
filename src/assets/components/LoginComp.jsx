@@ -1,10 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-//suprabase imports
-import { createClient } from "@supabase/supabase-js";
-import { Auth } from "@supabase/auth-ui-react";
-import { ThemeSupa } from "@supabase/auth-ui-shared";
 //icons
 import { IoClose } from "react-icons/io5";
 import { FcGoogle } from "react-icons/fc";
@@ -20,6 +16,10 @@ import useWindowSize from "../Hooks/useWindowSize";
 //Modals
 import AlertModal from "./AlertModal";
 import CoockisModal from "./CoockisModal";
+//firebase
+import { auth, googleProvider, githubProvider,db } from "../../../firebase";
+import { signInWithPopup } from "firebase/auth";
+import { ref, set } from 'firebase/database';
 
 function LoginComp() {
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ function LoginComp() {
   const backgroundCompt = theme === "light" ? "#ffffff" : "#242424";
   const color = theme === "light" ? "#000000" : "aliceblue";
   const border = theme === "light" ? "#ededed" : "#333";
-  const [isLogiedIn , setLogin] = useState(false);
+  const [isLogiedIn, setLogin] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
   //coockis handler
@@ -56,69 +56,72 @@ function LoginComp() {
   };
 
   // login logic
-  const SUPABASE_KEY =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhkcmJzcmdvb2hrYnBod2JybnJxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjkyMDM3OTMsImV4cCI6MjA0NDc3OTc5M30.GO2EfYQIDV5WHrJL5Bu67Yyw_L59HPOuv9mpgmGY7ZI";
-  const SUPABASE_URL = "https://hdrbsrgoohkbphwbrnrq.supabase.co";
-  const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
-
   // login with google
-  const loginWithGoogle = async () => {
+  const signInWithGoogle = async () => {
     try {
-      const { data, error } = await supabase.auth.signInWithOAuth({
-        provider: "google",
+      const result = await signInWithPopup(auth, googleProvider);
+      const user = result.user;
+
+      // Extract user details
+      const userId = user.uid;
+      const name = user.displayName;
+      const email = user.email;
+      const profilePicture = user.photoURL;
+
+      // Push user data to Realtime Database
+      await set(ref(db, 'users/' + userId), {
+        userId,
+        name,
+        email,
+        profilePicture,
       });
 
-      if (error) {
-        console.error("Login error:", error.message);
-        return;
-      }
-
-      console.log("OAuth login successful:", data);
+      console.log("User loged in");
       acceptCookies();
+      navigate("/")
 
     } catch (error) {
-      console.error("Unexpected error during login:", error);
+      console.error("Google sign-in error:", error);
     }
   };
 
   // login with gitHub
-  const loginWithGithub = async () => {
+  const signInWithGithub = async () => {
     try {
-      const { data, error } = await supabase.auth.signInWithOAuth({
-        provider: "github",
+      const result = await signInWithPopup(auth, githubProvider);
+      console.log("User loged in");
+      const user = result.user;
+
+      // Extract user details
+      const userId = user.uid;
+      const name = user.displayName;
+      const email = user.email;
+      const profilePicture = user.photoURL;
+
+      // Push user data to Realtime Database
+      await set(ref(db, 'users/' + userId), {
+        userId,
+        name,
+        email,
+        profilePicture
       });
-
-      if (error) {
-        console.error("Login error:", error.message);
-        return;
-      }
-
-      console.log("OAuth login successful:", data);
       acceptCookies();
-
-      // add navigation to a new page
+      navigate("/")
     } catch (error) {
-      console.error("Unexpected error during login:", error);
-      setErrorMessage(error.message);
+      console.error("GitHub sign-in error:", error);
     }
   };
-
-  const LogoutFromGoogle = async () => {
-    const { error } = await supabase.auth.signOut();
-  };
-
-  
-
   useEffect(() => {
     const consent = getCookie("LoginContent");
     if (!consent) {
-      console.log('is not login in')
-    }else{
+      console.log("is not login in");
+      
+    } else {
       setLogin(true);
-      console.log('is onready login in')
+      console.log("is onready login in");
+      navigate("/")
+
     }
-    
-    
   }, []);
 
   return (
@@ -126,7 +129,7 @@ function LoginComp() {
       <div style={{ width: "100vw", height: "100vh", display: "flex" }}>
         <div
           style={{
-            width: isTablet ?  "35%" :"100%",
+            width: isTablet ? "35%" : "100%",
             height: "100%",
             background: isTablet ? backgroundCompt : background,
             display: "flex",
@@ -191,7 +194,7 @@ function LoginComp() {
                     width: "100%",
                     margin: 4,
                   }}
-                  onClick={loginWithGoogle}
+                  onClick={signInWithGoogle}
                 />
                 <TbBrandGithubFilled
                   size={25}
@@ -204,7 +207,7 @@ function LoginComp() {
                     width: "100%",
                     margin: 4,
                   }}
-                  onClick={loginWithGithub}
+                  onClick={signInWithGithub}
                 />
               </div>
             </div>
@@ -215,7 +218,7 @@ function LoginComp() {
             width: "70%",
             height: "100%",
             background: background,
-            display:isTablet ? "flex" :"none",
+            display: isTablet ? "flex" : "none",
             justifyContent: "center",
             alignItems: "center",
             transition: "display 1s ease-in-out",
